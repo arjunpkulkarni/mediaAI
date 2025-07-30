@@ -231,7 +231,7 @@ export default function MediaKitForm() {
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="relative aspect-video w-full max-w-4xl mx-auto rounded-lg overflow-hidden border">
+              <div className="relative aspect-[210/297] w-full max-w-2xl mx-auto rounded-lg overflow-hidden border">
                 <div className="absolute inset-0">
                   <PDFViewer width="100%" height="100%">
                     <PDFTemplate {...mediaKitData} />

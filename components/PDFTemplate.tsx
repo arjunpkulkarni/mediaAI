@@ -178,9 +178,9 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
   },
   postImageContainer: {
-    width: '32%',
-    aspectRatio: 1,
-    marginRight: '2%',
+    width: '24%',
+    aspectRatio: 0.5625,
+    marginRight: '1.33%',
     marginBottom: 10,
     backgroundColor: '#292929',
     borderRadius: 8,
@@ -346,7 +346,7 @@ const PDFTemplate: React.FC<PDFTemplateProps> = ({
             {allPosts.map((post: any, index: number) => (
               <Link key={post.id} src={post.postUrl} style={[
                 styles.postImageContainer,
-                (index + 1) % 3 === 0 ? { marginRight: 0 } : {}
+                (index + 1) % 4 === 0 ? { marginRight: 0 } : {}
               ]}>
                 <Image style={styles.postImage} src={post.thumbnailUrl} />
               </Link>
