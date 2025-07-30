@@ -1,7 +1,7 @@
 import OpenAI from 'openai';
 
 const client = new OpenAI({
-  apiKey: "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",
+  apiKey: process.env.OPENAI_API_KEY,
 });
 
 export async function generateBio(instagramData: any, tiktokData: any): Promise<string> {
@@ -35,11 +35,11 @@ export async function generateBio(instagramData: any, tiktokData: any): Promise<
   `;
 
   try {
-    const response = await client.responses.create({
-      model: "gpt-4.1",
-      input: prompt,
+    const response = await client.chat.completions.create({
+      model: "gpt-4",
+      messages: [{ role: "user", content: prompt }],
     });
-    return response.output_text?.trim() || "We couldn't generate a bio for you at this time.";
+    return response.choices[0].message.content?.trim() || "We couldn't generate a bio for you at this time.";
   } catch (error) {
     console.error("Error generating bio from OpenAI:", error);
     throw new Error("Failed to generate bio.");
