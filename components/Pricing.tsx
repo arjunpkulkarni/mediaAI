@@ -38,19 +38,19 @@ export function Pricing({ onGetStarted }: { onGetStarted: () => void }) {
   return (
     <section className="py-20">
       <div className="container mx-auto px-4">
-        <h2 className="text-3xl font-bold text-center mb-12">Pricing</h2>
+        <h2 className="text-3xl font-bold text-center mb-12 text-brand-dark">Pricing</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {tiers.map((tier) => (
-            <Card key={tier.name} className="flex flex-col">
+            <Card key={tier.name} className="flex flex-col bg-white shadow-lg border-0">
               <CardHeader>
-                <CardTitle>{tier.name}</CardTitle>
+                <CardTitle className="text-brand-dark">{tier.name}</CardTitle>
                 <CardDescription>
-                  <span className="text-3xl font-bold">{tier.price}</span>
-                  <span className="text-muted-foreground">{tier.priceSuffix}</span>
+                  <span className="text-3xl font-bold text-brand-dark">{tier.price}</span>
+                  <span className="text-brand-dark/70">{tier.priceSuffix}</span>
                 </CardDescription>
               </CardHeader>
               <CardContent className="flex-grow">
-                <ul className="space-y-2">
+                <ul className="space-y-2 text-brand-dark/90">
                   {tier.features.map((feature) => (
                     <li key={feature} className="flex items-center">
                       <svg
@@ -63,7 +63,7 @@ export function Pricing({ onGetStarted }: { onGetStarted: () => void }) {
                         strokeWidth="2"
                         strokeLinecap="round"
                         strokeLinejoin="round"
-                        className="mr-2 h-4 w-4 text-green-500"
+                        className="mr-2 h-4 w-4 text-brand-primary"
                       >
                         <polyline points="20 6 9 17 4 12"></polyline>
                       </svg>
@@ -73,7 +73,7 @@ export function Pricing({ onGetStarted }: { onGetStarted: () => void }) {
                 </ul>
               </CardContent>
               <CardFooter>
-                <Button onClick={onGetStarted} className="w-full">
+                <Button onClick={onGetStarted} className="w-full bg-gradient-primary text-white hover:opacity-90">
                   {tier.cta}
                 </Button>
               </CardFooter>

@@ -11,7 +11,8 @@ const config: Config = {
   	extend: {
   		backgroundImage: {
   			'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-  			'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))'
+  			'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+			'gradient-primary': 'linear-gradient(to right, #8A2BE2, #C71585)'
   		},
   		colors: {
   			background: 'hsl(var(--background))',
@@ -53,13 +54,20 @@ const config: Config = {
   				'3': 'hsl(var(--chart-3))',
   				'4': 'hsl(var(--chart-4))',
   				'5': 'hsl(var(--chart-5))'
-  			}
+  			},
+			'brand-primary': '#8A2BE2',
+			'brand-secondary': '#C71585',
+			'brand-dark': '#4B0082',
+			'brand-light': '#E6E6FA'
   		},
   		borderRadius: {
   			lg: 'var(--radius)',
   			md: 'calc(var(--radius) - 2px)',
   			sm: 'calc(var(--radius) - 4px)'
-  		}
+  		},
+		fontFamily: {
+			sans: ['TikTokSans', 'sans-serif'],
+		}
   	}
   },
   plugins: [require("tailwindcss-animate")],
