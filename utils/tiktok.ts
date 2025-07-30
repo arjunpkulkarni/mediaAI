@@ -50,6 +50,7 @@ export async function fetchTikTokData(username: string, limit: number = 3) {
         followingCount: firstPost.authorMeta.following,
         heartCount: firstPost.authorMeta.heart,
         videoCount: firstPost.authorMeta.video,
+        profilePicUrl: firstPost.authorMeta.avatar,
     } : {};
 
     const topPosts = items.map((p: TikTokPost) => ({

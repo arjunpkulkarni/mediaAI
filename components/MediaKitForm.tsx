@@ -22,6 +22,7 @@ interface FormValues {
   instagram?: string;
   tiktok?: string;
   email: string;
+  name: string;
 }
 
 export default function MediaKitForm() {
@@ -30,14 +31,14 @@ export default function MediaKitForm() {
     handleSubmit,
     formState: { errors },
   } = useForm<FormValues>({
-    defaultValues: { instagram: "", tiktok: "", email: "" },
+    defaultValues: { instagram: "", tiktok: "", email: "", name: "" },
   });
 
   const [loading, setLoading] = useState(false);
   const [mediaKitData, setMediaKitData] = useState<any>(null);
 
   const onSubmit = async (data: FormValues) => {
-    const { instagram, tiktok, email } = data;
+    const { instagram, tiktok, email, name } = data;
     if (!instagram && !tiktok) {
       alert("Please enter an Instagram or TikTok handle.");
       return;
@@ -85,6 +86,8 @@ export default function MediaKitForm() {
         bio,
         instagramHandle: instagram,
         tiktokHandle: tiktok,
+        name,
+        profilePicture: igData?.profileDetails?.profilePicUrl || tiktokData?.stats?.profilePicUrl,
       };
 
       setMediaKitData(newMediaKitData);
@@ -145,6 +148,41 @@ export default function MediaKitForm() {
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
+                <Label htmlFor="name" className="font-semibold">
+                  Full Name <span className="text-red-500">*</span>
+                </Label>
+                <Input
+                  id="name"
+                  placeholder="e.g., Jane Doe"
+                  {...register("name", { required: "Full Name is required" })}
+                  className="mt-1"
+                />
+                {errors.name && (
+                  <p className="text-red-600 text-sm mt-1">
+                    {errors.name.message}
+                  </p>
+                )}
+              </div>
+              <div>
+                <Label htmlFor="email" className="font-semibold">
+                  Email Address <span className="text-red-500">*</span>
+                </Label>
+                <Input
+                  type="email"
+                  id="email"
+                  placeholder="you@example.com"
+                  {...register("email", { required: "Email is required" })}
+                  className="mt-1"
+                />
+                {errors.email && (
+                  <p className="text-red-600 text-sm mt-1">
+                    {errors.email.message}
+                  </p>
+                )}
+              </div>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
                 <Label htmlFor="instagram" className="font-semibold">
                   Instagram Handle
                 </Label>
@@ -166,23 +204,6 @@ export default function MediaKitForm() {
                   className="mt-1"
                 />
               </div>
-            </div>
-            <div>
-              <Label htmlFor="email" className="font-semibold">
-                Email Address <span className="text-red-500">*</span>
-              </Label>
-              <Input
-                type="email"
-                id="email"
-                placeholder="you@example.com"
-                {...register("email", { required: "Email is required" })}
-                className="mt-1"
-              />
-              {errors.email && (
-                <p className="text-red-600 text-sm mt-1">
-                  {errors.email.message}
-                </p>
-              )}
             </div>
             <Button
               type="submit"

@@ -35,6 +35,7 @@ export async function fetchProfileDetails(username: string) {
         followerCount: data.followersCount,
         followingCount: data.followingCount,
         postsCount: data.postsCount,
+        profilePicUrl: data.profilePicUrl,
     };
 }
 

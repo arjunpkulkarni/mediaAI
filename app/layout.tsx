@@ -6,8 +6,8 @@ import { cn } from "@/lib/utils"
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "KitGen",
-  description: "AI Media Kits",
+  title: "AI Media Kit Generator",
+  description: "Create beautiful, data-driven media kits in seconds.",
 };
 
 export default function RootLayout({

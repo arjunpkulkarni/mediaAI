@@ -1,7 +1,7 @@
 import OpenAI from 'openai';
 
 const client = new OpenAI({
-  apiKey: "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",
+  apiKey: "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",
 });
 
 export async function generateBio(instagramData: any, tiktokData: any): Promise<string> {
