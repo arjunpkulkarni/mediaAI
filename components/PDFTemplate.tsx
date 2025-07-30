@@ -176,11 +176,12 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'flex-start',
-    gap: '2%',
   },
   postImageContainer: {
     width: '32%',
     aspectRatio: 1,
+    marginRight: '2%',
+    marginBottom: 10,
     backgroundColor: '#292929',
     borderRadius: 8,
     overflow: 'hidden',
@@ -339,11 +340,14 @@ const PDFTemplate: React.FC<PDFTemplateProps> = ({
           </View>
         </View>
         
-        <View style={styles.pastHighlightsSection}>
+        <View style={styles.pastHighlightsSection} break>
           <Text style={styles.pastHighlightsTitle}>Past Highlights</Text>
           <View style={styles.postGrid}>
-            {allPosts.map((post: any) => (
-              <Link key={post.id} src={post.postUrl} style={styles.postImageContainer}>
+            {allPosts.map((post: any, index: number) => (
+              <Link key={post.id} src={post.postUrl} style={[
+                styles.postImageContainer,
+                (index + 1) % 3 === 0 ? { marginRight: 0 } : {}
+              ]}>
                 <Image style={styles.postImage} src={post.thumbnailUrl} />
               </Link>
             ))}
