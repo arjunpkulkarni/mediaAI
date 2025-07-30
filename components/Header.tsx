@@ -1,6 +1,7 @@
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Sparkles, Menu } from 'lucide-react';
+import Image from 'next/image';
 
 interface HeaderProps {
   onGetStarted: () => void;
@@ -11,19 +12,10 @@ export function Header({ onGetStarted }: HeaderProps) {
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-gradient-primary text-white">
       <div className="container mx-auto px-4">
         <div className="flex h-16 items-center justify-between">
-          <div className="flex items-center space-x-4">
-            <div className="flex items-center space-x-2">
-              <div className="p-2 bg-gradient-primary rounded-lg">
-                <Sparkles className="w-6 h-6 text-primary-foreground" />
-              </div>
-              <div>
-                <h1 className="text-xl font-bold text-white">
-                  KitGen
-                </h1>
-                <p className="text-xs text-brand-light">AI Media Kits</p>
-              </div>
-            </div>
-          </div>
+          <a href="/" className="flex items-center space-x-2">
+            <Image src="/logo.png" alt="AI Media Logo" width={40} height={40} />
+            <span className="font-bold text-xl">KitGen</span>
+          </a>
 
           <nav className="hidden md:flex items-center space-x-8">
             <a href="#features" className="text-sm font-medium text-brand-light hover:text-white transition-colors">

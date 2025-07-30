@@ -4,10 +4,13 @@ import PDFTemplate from '../../../components/PDFTemplate';
 import { Readable } from 'stream';
 
 export async function POST(request: NextRequest) {
+  console.log("PDF generation request received");
   try {
     const body = await request.json();
+    console.log("Request body:", body);
     
     const stream = await renderToStream(<PDFTemplate {...body} />);
+    console.log("PDF stream created");
     
     const headers = new Headers({
       'Content-Type': 'application/pdf',
