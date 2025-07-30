@@ -1,5 +1,73 @@
 // boulevard-app/src/components/PDFTemplate.tsx
 import React from 'react';
+import { Page, Text, View, Document, StyleSheet, Image, Link } from '@react-pdf/renderer';
+
+const styles = StyleSheet.create({
+  page: {
+    backgroundColor: '#ffffff',
+    padding: 30,
+    fontFamily: 'Helvetica',
+  },
+  header: {
+    textAlign: 'center',
+    borderBottomWidth: 2,
+    borderBottomColor: '#e5e7eb',
+    paddingBottom: 10,
+    marginBottom: 20,
+  },
+  h1: {
+    fontSize: 40,
+    fontWeight: 'bold',
+    color: '#111827',
+  },
+  h2: {
+    fontSize: 24,
+    fontWeight: 'semibold',
+    borderBottomWidth: 1,
+    borderBottomColor: '#d1d5db',
+    paddingBottom: 5,
+    marginBottom: 10,
+  },
+  h3: {
+    fontSize: 18,
+    fontWeight: 'semibold',
+    marginBottom: 5,
+  },
+  p: {
+    fontSize: 12,
+    lineHeight: 1.5,
+  },
+  subtitle: {
+    fontSize: 14,
+    color: '#6b7280',
+  },
+  section: {
+    marginBottom: 20,
+  },
+  statsContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginBottom: 20,
+  },
+  statBox: {
+    backgroundColor: '#f9fafb',
+    padding: 15,
+    borderRadius: 8,
+    width: '48%',
+  },
+  postGrid: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'space-between',
+  },
+  postImage: {
+    width: '32%',
+    height: 'auto',
+    borderRadius: 6,
+    marginBottom: 5,
+  },
+  text: {},
+});
 
 interface PDFTemplateProps {
   instagramData?: any;
@@ -10,67 +78,68 @@ interface PDFTemplateProps {
 }
 
 const PDFTemplate: React.FC<PDFTemplateProps> = ({ instagramData, tiktokData, bio, instagramHandle, tiktokHandle }) => {
-  const igStats = instagramData?.stats;
+  const igStats = instagramData?.profileDetails;
   const tkStats = tiktokData?.stats;
   const igPosts = instagramData?.topPosts;
   const tkPosts = tiktokData?.topPosts;
 
   return (
-    <div className="w-[8.5in] h-[11in] bg-white shadow-lg p-8 text-gray-800 font-sans">
-      {/* Header */}
-      <div className="text-center border-b-2 border-gray-200 pb-4 mb-8">
-        <h1 className="text-5xl font-bold text-gray-900">
-          {(instagramHandle || tiktokHandle)?.toUpperCase()}'s Media Kit
-        </h1>
-        <p className="text-lg text-gray-500">
-          {instagramHandle && `@${instagramHandle}`} {tiktokHandle && `| @${tiktokHandle}`}
-        </p>
-      </div>
+    <Document>
+      <Page size="A4" style={styles.page}>
+        {/* Header */}
+        <View style={styles.header}>
+          <Text style={styles.h1}>
+            {(instagramHandle || tiktokHandle)?.toUpperCase()}'s Media Kit
+          </Text>
+          <Text style={styles.subtitle}>
+            {instagramHandle && `@${instagramHandle}`} {tiktokHandle && `| @${tiktokHandle}`}
+          </Text>
+        </View>
 
-      {/* About Me Section */}
-      <div className="mb-8">
-        <h2 className="text-3xl font-semibold border-b border-gray-300 pb-2 mb-4">About Me</h2>
-        <p className="text-base leading-relaxed">{bio || 'Bio goes here...'}</p>
-      </div>
+        {/* About Me Section */}
+        <View style={styles.section}>
+          <Text style={styles.h2}>About Me</Text>
+          <Text style={styles.p}>{bio || 'Bio goes here...'}</Text>
+        </View>
 
-      {/* Stats Section */}
-      <div className="grid grid-cols-2 gap-8 mb-8">
-        {igStats && (
-          <div className="p-4 bg-gray-50 rounded-lg">
-            <h3 className="text-2xl font-semibold mb-2 text-pink-600">Instagram</h3>
-            <p><strong>Followers:</strong> {igStats.followerCount?.toLocaleString()}</p>
-            <p><strong>Following:</strong> {igStats.followingCount?.toLocaleString()}</p>
-            <p><strong>Posts:</strong> {igStats.postsCount?.toLocaleString()}</p>
-          </div>
-        )}
-        {tkStats && (
-          <div className="p-4 bg-gray-50 rounded-lg">
-            <h3 className="text-2xl font-semibold mb-2 text-blue-600">TikTok</h3>
-            <p><strong>Followers:</strong> {tkStats.followerCount?.toLocaleString()}</p>
-            <p><strong>Hearts:</strong> {tkStats.heartCount?.toLocaleString()}</p>
-            <p><strong>Videos:</strong> {tkStats.videoCount?.toLocaleString()}</p>
-          </div>
-        )}
-      </div>
-      
-      {/* Top Posts Section */}
-      <div>
-        <h2 className="text-3xl font-semibold border-b border-gray-300 pb-2 mb-4">Top Content</h2>
-        <div className="grid grid-cols-3 gap-4">
-          {igPosts?.map((post: any) => (
-            <a key={post.id} href={post.postUrl} target="_blank" rel="noopener noreferrer" className="block">
-              <img src={post.thumbnailUrl} alt="Instagram Post" className="w-full h-auto rounded-md shadow-md" />
-            </a>
-          ))}
-          {tkPosts?.map((post: any) => (
-            <a key={post.id} href={post.postUrl} target="_blank" rel="noopener noreferrer" className="block">
-              <img src={post.thumbnailUrl} alt="TikTok Post" className="w-full h-auto rounded-md shadow-md" />
-            </a>
-          ))}
-        </div>
-      </div>
-
-    </div>
+        {/* Stats Section */}
+        <View style={styles.statsContainer}>
+          {igStats && (
+            <View style={styles.statBox}>
+              <Text style={styles.h3}>Instagram</Text>
+              <Text style={styles.text}>Followers: {igStats.followerCount?.toLocaleString()}</Text>
+              <Text style={styles.text}>Following: {igStats.followingCount?.toLocaleString()}</Text>
+              <Text style={styles.text}>Posts: {igStats.postsCount?.toLocaleString()}</Text>
+            </View>
+          )}
+          {tkStats && (
+            <View style={styles.statBox}>
+              <Text style={styles.h3}>TikTok</Text>
+              <Text style={styles.text}>Followers: {tkStats.followerCount?.toLocaleString()}</Text>
+              <Text style={styles.text}>Hearts: {tkStats.heartCount?.toLocaleString()}</Text>
+              <Text style={styles.text}>Videos: {tkStats.videoCount?.toLocaleString()}</Text>
+            </View>
+          )}
+        </View>
+        
+        {/* Top Posts Section */}
+        <View>
+          <Text style={styles.h2}>Top Content</Text>
+          <View style={styles.postGrid}>
+            {igPosts?.map((post: any) => (
+              <Link key={post.id} src={post.postUrl} style={styles.postImage}>
+                <Image src={post.thumbnailUrl} />
+              </Link>
+            ))}
+            {tkPosts?.map((post: any) => (
+              <Link key={post.id} src={post.postUrl} style={styles.postImage}>
+                <Image src={post.thumbnailUrl} />
+              </Link>
+            ))}
+          </View>
+        </View>
+      </Page>
+    </Document>
   );
 };
 

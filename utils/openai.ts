@@ -1,7 +1,7 @@
 import OpenAI from 'openai';
 
-const openai = new OpenAI({
-  apiKey: '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',
+const client = new OpenAI({
+  apiKey: "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",
 });
 
 export async function generateBio(instagramData: any, tiktokData: any): Promise<string> {
@@ -35,13 +35,11 @@ export async function generateBio(instagramData: any, tiktokData: any): Promise<
   `;
 
   try {
-    const response = await openai.chat.completions.create({
-      model: "gpt-4",
-      messages: [{ role: "user", content: prompt }],
-      max_tokens: 150,
-      temperature: 0.7,
+    const response = await client.responses.create({
+      model: "gpt-4.1",
+      input: prompt,
     });
-    return response.choices[0].message.content?.trim() || "We couldn't generate a bio for you at this time.";
+    return response.output_text?.trim() || "We couldn't generate a bio for you at this time.";
   } catch (error) {
     console.error("Error generating bio from OpenAI:", error);
     throw new Error("Failed to generate bio.");
