@@ -17,38 +17,38 @@ export function Features() {
   const features = [
     {
       icon: <Zap className="w-8 h-8" />,
-      title: "One-Click Generation",
-      description: "Enter your social handles and get a professional media kit in under 30 seconds. No design skills required.",
-      badge: "Lightning Fast"
+      title: "Land Deals in One Click",
+      description: "Stop wasting hours in Canva. Go from social handles to a stunning, brand-ready media kit in 30 seconds.",
+      badge: "Save Hours"
     },
     {
       icon: <BarChart3 className="w-8 h-8" />,
-      title: "Real Analytics",
-      description: "Automatically fetch your latest follower counts, engagement rates, and top-performing content.",
-      badge: "Live Data"
+      title: "Real-Time Analytics",
+      description: "Impress brands with live, verifiable data. We automatically fetch your latest stats so you don't have to.",
+      badge: "Always Updated"
     },
     {
       icon: <Brain className="w-8 h-8" />,
-      title: "AI-Powered Bio",
-      description: "Our AI analyzes your content to create compelling bio sections that showcase your unique brand.",
-      badge: "Smart Content"
+      title: "AI-Crafted Pitches",
+      description: "Our AI writes compelling bios and content highlights that get you noticed. No more writer's block.",
+      badge: "Smart"
     },
     {
       icon: <FileDown className="w-8 h-8" />,
-      title: "Professional PDF",
-      description: "Download a beautifully designed PDF that's ready to send to brands and agencies immediately.",
-      badge: "Brand Ready"
+      title: "Pitch-Perfect PDF",
+      description: "Download a professionally designed PDF that makes brands say 'yes'. Get replies in hours, not weeks.",
+      badge: "High-Converting"
     },
     {
       icon: <Instagram className="w-8 h-8" />,
       title: "Instagram Integration",
-      description: "Pull your Instagram stats, top posts, and engagement metrics directly from your profile.",
+      description: "Showcase your Instagram success. We automatically fetch your top posts to prove your value to brands.",
       badge: "Instagram"
     },
     {
       icon: <Video className="w-8 h-8" />,
       title: "TikTok Analytics",
-      description: "Showcase your TikTok performance with views, likes, and viral content highlights.",
+      description: "Go viral and get paid. Highlight your TikTok success with real-time analytics and top-performing videos.",
       badge: "TikTok"
     }
   ];
@@ -63,7 +63,7 @@ export function Features() {
           </Badge>
           <h2 className="text-3xl lg:text-4xl font-bold">
             Everything You Need to{' '}
-            <span className="bg-gradient-primary bg-clip-text text-transparent">
+            <span className="text-black">
               Land Brand Deals
             </span>
           </h2>
@@ -97,30 +97,31 @@ export function Features() {
           ))}
         </div>
 
-        {/* Stats Section */}
-        <div className="mt-20 text-center">
-          <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
-            <div className="space-y-2">
-              <div className="flex items-center justify-center">
-                <TrendingUp className="w-6 h-6 text-primary mr-2" />
-                <span className="text-3xl font-bold text-primary">89%</span>
-              </div>
-              <p className="text-muted-foreground">Higher Response Rate</p>
-            </div>
-            <div className="space-y-2">
-              <div className="flex items-center justify-center">
-                <Users className="w-6 h-6 text-primary mr-2" />
-                <span className="text-3xl font-bold text-primary">1000+</span>
-              </div>
-              <p className="text-muted-foreground">Creators Using KitGen</p>
-            </div>
-            <div className="space-y-2">
-              <div className="flex items-center justify-center">
-                <Mail className="w-6 h-6 text-primary mr-2" />
-                <span className="text-3xl font-bold text-primary">3x</span>
-              </div>
-              <p className="text-muted-foreground">Faster Brand Outreach</p>
-            </div>
+        {/* Testimonials Section */}
+        <div className="mt-24 text-center">
+          <h3 className="text-3xl font-bold mb-4">Built By Creators, For Creators</h3>
+          <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-12">
+            We get it. You're a creator, not a designer. Here's what people are saying about their one-click media kits.
+          </p>
+          <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            <Card>
+              <CardContent className="p-6 text-left">
+                <p className="text-muted-foreground mb-4 italic">"I sent this exact PDF to a brand and they said yes within 1 hour. This has never happened before."</p>
+                <p className="font-semibold">- Sarah J, Lifestyle Creator</p>
+              </CardContent>
+            </Card>
+            <Card>
+              <CardContent className="p-6 text-left">
+                <p className="text-muted-foreground mb-4 italic">"I used to spend 2 hours in Canva. Now I just click one button. If I knew about this 3 years ago I'd be making so much more money."</p>
+                <p className="font-semibold">- David L, Tech Reviewer</p>
+              </CardContent>
+            </Card>
+            <Card>
+              <CardContent className="p-6 text-left">
+                <p className="text-muted-foreground mb-4 italic">"I used to send my old media kit and get ghosted. The first kit I made here landed me 3 brand deals in a week."</p>
+                <p className="font-semibold">- Maria K, Fitness Coach</p>
+              </CardContent>
+            </Card>
           </div>
         </div>
       </div>

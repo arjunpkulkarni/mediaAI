@@ -2,6 +2,8 @@
 "use client";
 
 import { useState } from 'react';
+import { PDFViewer } from '@react-pdf/renderer';
+import PDFTemplate from './PDFTemplate';
 
 export default function MediaKitForm() {
   const [instagram, setInstagram] = useState('');
@@ -152,18 +154,27 @@ export default function MediaKitForm() {
         </div>
       </form>
       {mediaKitData && (
-        <div className="pt-6">
+        <div className="pt-6 relative">
            <div className="w-full h-px bg-gray-200 mb-6"></div>
-           <h3 className="text-lg font-medium leading-6 text-gray-900">Your Media Kit is ready!</h3>
-            <p className="mt-1 text-sm text-gray-500">
-                You can now download your generated PDF.
-            </p>
-          <button
-            onClick={handleDownload}
-            className="flex justify-center w-full px-4 py-2 mt-4 text-sm font-medium text-white bg-green-600 border border-transparent rounded-md shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
-          >
-            Download PDF
-          </button>
+           <h3 className="text-2xl font-bold text-center mb-2">Your Media Kit is Ready!</h3>
+           <p className="text-center text-muted-foreground mb-6">Here's a preview of your AI-generated media kit. Ready to land your next brand deal?</p>
+           
+           <div className="relative">
+             <div className="aspect-w-1 aspect-h-1 w-full max-w-2xl mx-auto blur-sm">
+                <PDFViewer width="100%" height="100%">
+                  <PDFTemplate {...mediaKitData} />
+                </PDFViewer>
+             </div>
+             <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/20">
+                <h4 className="text-2xl font-bold text-white mb-4">Unlock Full Version</h4>
+                <button
+                    onClick={handleDownload}
+                    className="px-6 py-3 text-lg font-semibold text-white bg-primary rounded-md shadow-lg hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
+                >
+                    Download PDF & Unlock
+                </button>
+             </div>
+           </div>
         </div>
       )}
     </div>
