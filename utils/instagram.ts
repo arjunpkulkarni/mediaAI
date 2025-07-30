@@ -1,7 +1,7 @@
 // boulevard-app/src/lib/instagram.ts
 import { ApifyClient } from 'apify-client';
 
-const APIFY_TOKEN = 'apify_api_CMWhmxDrvmgR6onotolMobSeiQgOiC44YCcf'; 
+const APIFY_TOKEN = 'apify_api_fSJxP1YwISnfDh7VSJbLn0Sc33NSUz2IRVr6'; 
 const INSTAGRAM_SCRAPER_ACTOR_ID = 'shu8hvrXbJbY3Eb9W';
 
 const client = new ApifyClient({
@@ -50,10 +50,11 @@ export async function fetchTopPosts(username: string, limit: number = 3) {
         resultsType: 'posts',
         resultsLimit: limit,
     });
+    console.log("Instagram posts from Apify:", JSON.stringify(posts, null, 2));
 
     return posts.map((p: any) => ({
         id: p.id,
-        thumbnailUrl: p.imageUrl,
+        thumbnailUrl: p.displayUrl,
         postUrl: `https://instagram.com/p/${p.shortcode}/`,
         likes: p.likesCount,
         comments: p.commentsCount,

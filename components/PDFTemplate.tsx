@@ -149,16 +149,20 @@ const PDFTemplate: React.FC<PDFTemplateProps> = ({ instagramData, tiktokData, bi
             <View>
               <Text style={styles.h2}>Top Content</Text>
               <View style={styles.postGrid}>
-                {igPosts.map((post: any) => (
-                  <Link key={post.id} src={post.postUrl} style={styles.postImage}>
-                    <Image src={post.thumbnailUrl} />
-                  </Link>
-                ))}
-                {tkPosts.map((post: any) => (
-                  <Link key={post.id} src={post.videoUrl} style={styles.postImage}>
-                    <Image src={post.coverUrl} />
-                  </Link>
-                ))}
+                {igPosts
+                  .filter((post: any) => post.thumbnailUrl)
+                  .map((post: any) => (
+                    <Link key={post.id} src={post.postUrl} style={styles.postImage}>
+                      <Image src={post.thumbnailUrl} />
+                    </Link>
+                  ))}
+                {tkPosts
+                  .filter((post: any) => post.thumbnailUrl)
+                  .map((post: any) => (
+                    <Link key={post.id} src={post.postUrl} style={styles.postImage}>
+                      <Image src={post.thumbnailUrl} />
+                    </Link>
+                  ))}
               </View>
             </View>
           </>

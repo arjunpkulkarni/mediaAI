@@ -1,7 +1,7 @@
 // boulevard-app/src/lib/tiktok.ts
 import { ApifyClient } from 'apify-client';
 
-const APIFY_TOKEN = 'apify_api_CMWhmxDrvmgR6onotolMobSeiQgOiC44YCcf';
+const APIFY_TOKEN = 'apify_api_fSJxP1YwISnfDh7VSJbLn0Sc33NSUz2IRVr6';
 const TIKTOK_SCRAPER_ACTOR_ID = 'GdWCkxBtKWOsKjdch';
 
 const client = new ApifyClient({
