@@ -35,6 +35,7 @@ export default function MediaKitForm() {
   });
 
   const [loading, setLoading] = useState(false);
+  const [downloading, setDownloading] = useState(false);
   const [mediaKitData, setMediaKitData] = useState<any>(null);
 
   const onSubmit = async (data: FormValues) => {
@@ -106,28 +107,36 @@ export default function MediaKitForm() {
 
   const handleDownload = async () => {
     if (!mediaKitData) return;
+    setDownloading(true);
 
-    console.log("Downloading PDF with data:", mediaKitData);
-    const res = await fetch("/api/generate-pdf", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(mediaKitData),
-    });
+    try {
+      console.log("Downloading PDF with data:", mediaKitData);
+      const res = await fetch("/api/generate-pdf", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(mediaKitData),
+      });
 
-    if (res.ok) {
-      console.log("PDF generated successfully");
-      const blob = await res.blob();
-      const url = window.URL.createObjectURL(blob);
-      const a = document.createElement("a");
-      a.href = url;
-      a.download = "media-kit.pdf";
-      document.body.appendChild(a);
-      a.click();
-      a.remove();
-      window.URL.revokeObjectURL(url);
-    } else {
-      console.error("Failed to download PDF");
-      alert("Failed to download PDF.");
+      if (res.ok) {
+        console.log("PDF generated successfully");
+        const blob = await res.blob();
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = "media-kit.pdf";
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        window.URL.revokeObjectURL(url);
+      } else {
+        console.error("Failed to download PDF");
+        alert("Failed to download PDF.");
+      }
+    } catch (error) {
+      console.error("An error occurred during download:", error);
+      alert("An error occurred while trying to download the PDF.");
+    } finally {
+      setDownloading(false);
     }
   };
 
@@ -248,8 +257,9 @@ export default function MediaKitForm() {
                 </div>
               </div>
               <div className="mt-6 text-center">
-                <Button onClick={handleDownload} size="lg">
-                  Download Full PDF
+                <Button onClick={handleDownload} size="lg" disabled={downloading}>
+                  {downloading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+                  {downloading ? "Downloading..." : "Download Full PDF"}
                 </Button>
               </div>
             </CardContent>
