@@ -2,6 +2,12 @@
 import React from 'react';
 import { Page, Text, View, Document, StyleSheet, Image, Link, Font } from '@react-pdf/renderer';
 
+interface Audience {
+  gender: { [key: string]: number };
+  age: { [key: string]: number };
+  interests: string[];
+}
+
 const styles = StyleSheet.create({
   page: {
     backgroundColor: '#1A1A1A',
@@ -209,6 +215,7 @@ interface PDFTemplateProps {
   tiktokHandle?: string;
   name?: string;
   profilePicture?: string;
+  audience?: Audience;
 }
 
 const PDFTemplate: React.FC<PDFTemplateProps> = ({
@@ -219,6 +226,7 @@ const PDFTemplate: React.FC<PDFTemplateProps> = ({
   tiktokHandle,
   name,
   profilePicture,
+  audience,
 }) => {
   const igStats = instagramData?.profileDetails;
   const tkStats = tiktokData?.stats;
@@ -239,13 +247,6 @@ const PDFTemplate: React.FC<PDFTemplateProps> = ({
 
   const displayName = name || 'Your Name';
   const displayBio = bio || 'Write something about yourself here. Keep it short, simple and include a bit of your personality.';
-  
-  // Dummy data for audience and past highlights to match the design
-  const audience = {
-    gender: { male: 60, female: 40 },
-    age: { '18-24': 35, '25-34': 45, '35-44': 15, '45+': 5 },
-    interests: ['Gaming', 'Sport', 'Entertainment', 'Technology'],
-  };
   
   return (
     <Document>
@@ -303,40 +304,37 @@ const PDFTemplate: React.FC<PDFTemplateProps> = ({
         
         <View style={styles.audienceSection}>
           <Text style={styles.audienceTitle}>Audience</Text>
+          
           <View style={styles.audienceGrid}>
             <Text style={styles.audienceCategory}>Gender</Text>
             <View style={styles.audienceBar}>
-              <View style={[styles.audienceBarFill, { width: `${audience.gender.male}%` }]} />
+              <View style={{
+                width: `${audience?.gender?.male || 0}%`,
+                height: 12,
+                backgroundColor: '#FF8A65',
+                borderRadius: 6
+              }} />
             </View>
           </View>
-          <View style={[styles.audienceLabels, { marginLeft: '22%' }]}>
-            <Text style={styles.audienceLabel}>Male ({audience.gender.male}%)</Text>
-            <Text style={styles.audienceLabel}>Female ({audience.gender.female}%)</Text>
+          <View style={styles.audienceLabels}>
+            <Text style={styles.audienceLabel}>Male: {audience?.gender?.male || 0}%</Text>
+            <Text style={styles.audienceLabel}>Female: {audience?.gender?.female || 0}%</Text>
           </View>
 
-          <View style={[styles.audienceGrid, { marginTop: 10 }]}>
-            <Text style={styles.audienceCategory}>Age</Text>
-            <View style={{flexDirection: 'row', width: '78%'}}>
-              {Object.entries(audience.age).map(([range, percentage]) => (
-                <View key={range} style={{ width: `${percentage}%`}}>
-                  <View style={[styles.audienceBarFill, { backgroundColor: '#FF8A65' }]} />
-                </View>
-              ))}
+          {audience?.age && Object.entries(audience.age).map(([range, percentage]) => (
+            <View key={range} style={styles.audienceGrid}>
+              <Text style={styles.audienceCategory}>{range}</Text>
+              <View style={styles.audienceBar}>
+                <View style={[styles.audienceBarFill, { width: `${percentage}%` }]} />
+              </View>
             </View>
-          </View>
-          <View style={[styles.audienceLabels, { marginLeft: '22%', justifyContent: 'space-around' }]}>
-            {Object.keys(audience.age).map(range => (
-              <Text key={range} style={styles.audienceLabel}>{range}</Text>
+          ))}
+          
+          <Text style={[styles.audienceTitle, { marginTop: 20, marginBottom: 10 }]}>Interests</Text>
+          <View style={styles.interestsContainer}>
+            {audience?.interests && audience.interests.map((interest: string) => (
+              <Text key={interest} style={styles.interestTag}>{interest}</Text>
             ))}
-          </View>
-
-          <View style={{...styles.audienceGrid, marginTop: 15, alignItems: 'center' }}>
-            <Text style={styles.audienceCategory}>Interests</Text>
-            <View style={[styles.interestsContainer, { width: '78%'}]}>
-              {audience.interests.map(interest => (
-                <Text key={interest} style={styles.interestTag}>{interest}</Text>
-              ))}
-            </View>
           </View>
         </View>
         

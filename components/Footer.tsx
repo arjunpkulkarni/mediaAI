@@ -1,5 +1,6 @@
 import { Badge } from '@/components/ui/badge';
 import { Sparkles, Heart } from 'lucide-react';
+import Link from 'next/link';
 
 export function Footer() {
   return (
@@ -50,8 +51,8 @@ export function Footer() {
             <h4 className="font-semibold mb-4 text-white">Company</h4>
             <ul className="space-y-2 text-sm text-brand-light/70">
               <li><a href="#about" className="hover:text-white transition-colors">About</a></li>
-              <li><a href="#privacy" className="hover:text-white transition-colors">Privacy</a></li>
-              <li><a href="#terms" className="hover:text-white transition-colors">Terms</a></li>
+              <li><Link href="/privacy-policy" className="hover:text-white transition-colors">Privacy Policy</Link></li>
+              <li><Link href="/terms" className="hover:text-white transition-colors">Terms of Service</Link></li>
               <li><a href="#contact" className="hover:text-white transition-colors">Contact</a></li>
             </ul>
           </div>

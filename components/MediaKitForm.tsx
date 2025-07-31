@@ -67,16 +67,19 @@ export default function MediaKitForm() {
 
       // Generate bio via OpenAI
       let bio = "";
+      let audience = {};
       if (igData || tiktokData) {
-        const bioResponse = await fetch("/api/openai", {
+        const openAIResponse = await fetch("/api/openai", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ instagramData: igData, tiktokData }),
         });
-        if (!bioResponse.ok) throw new Error("Failed to generate bio");
-        const bioResult = await bioResponse.json();
-        bio = bioResult.bio;
+        if (!openAIResponse.ok) throw new Error("Failed to generate AI content");
+        const openAIResult = await openAIResponse.json();
+        bio = openAIResult.bio;
+        audience = openAIResult.audience;
         console.log("Bio generated:", bio);
+        console.log("Audience data:", audience);
       }
 
       const newMediaKitData = {
@@ -84,6 +87,7 @@ export default function MediaKitForm() {
         instagramData: igData,
         tiktokData,
         bio,
+        audience,
         instagramHandle: instagram,
         tiktokHandle: tiktok,
         name,
