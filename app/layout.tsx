@@ -18,6 +18,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        <meta name="tiktok-developers-site-verification" content="PfW8fUKDXzAfVEjkZ4UPZl897aTUr7t5" />
         <link rel="icon" href="/favicon.ico" />
       </head>
       <body className={cn("font-sans", inter.className)}>
